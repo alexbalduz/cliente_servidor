@@ -30,3 +30,4 @@ class cliente():
                 data = input('Escribe algo > ')
                 dt = bytes(data, 'UTF-8')
                 socket_cliente.send(dt)
+cliente.iniciar()
