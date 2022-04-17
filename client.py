@@ -7,7 +7,13 @@ class hilo_cliente(threading.Thread):
         threading.Thread.__init__(self)
         self.socket = socket
 
-
+    def run(self):
+        while True:
+            data = self.socket.recv(2048)
+            dt = data.decode()
+            if(dt == ''):
+                continue
+            print(dt)
 
 class cliente():
     def iniciar():
