@@ -1,6 +1,10 @@
 import socket
 import threading
-
+class hilo_servidor(threading.Thread):
+    def __init__(self,conexion,direccion, sockets):
+        threading.Thread.__init__(self)
+        self.conexion = conexion
+        self.direccion = direccion
 class servidor():
     host = socket.gethostname()
     port = 12345
