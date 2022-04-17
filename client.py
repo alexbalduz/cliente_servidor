@@ -24,6 +24,8 @@ class cliente():
             print("Socket establecido")
             socket_cliente.connect((host, port))
             print("Socket conectado")
+            hl = hilo_cliente(socket_cliente)
+            hl.start()
             while True:
                 data = input('Escribe algo > ')
                 dt = bytes(data, 'UTF-8')
