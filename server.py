@@ -16,6 +16,7 @@ class hilo_servidor(threading.Thread):
             print(self.direccion[0], " > ", dt)
 class servidor():
     def iniciar():
+        clientes_sockets = []
         host = socket.gethostname()
         port = 12345
         hilos = []
@@ -28,7 +29,8 @@ class servidor():
 
             while True:
                 conexion_socket, direccion = socket_server.accept()
-                hilo = hilo_servidor(conexion_socket, direccion)
+                hilo = hilo_servidor(conexion_socket, direccion, clientes_sockets)
                 hilo.start()
                 hilos.append(hilo)
+                clientes_sockets.append(conexion_socket)
 servidor.iniciar()
