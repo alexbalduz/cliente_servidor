@@ -6,8 +6,11 @@ class hilo_servidor(threading.Thread):
         threading.Thread.__init__(self)
         self.conexion = conexion
         self.direccion = direccion
+        self.sockets = sockets
     def run(self):
         print("\nNew conexion : ", self.direccion[0])
+        for sock in self.sockets:
+            sock.send("\n" + self.direccion[0] + ": Conectado")
         while True:
             data = self.conexion.recv(2048)
             dt = data.decode()
@@ -20,6 +23,7 @@ class servidor():
         host = socket.gethostname()
         port = 12345
         hilos = []
+
         with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as socket_server:
             socket_server.bind((host, port))
             socket_server.listen(5)
