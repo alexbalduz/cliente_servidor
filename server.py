@@ -15,15 +15,19 @@ class hilo_servidor(threading.Thread):
                 continue
             print(self.direccion[0], " > ", dt)
 class servidor():
-    host = socket.gethostname()
-    port = 12345
+    def iniciar():
+        host = socket.gethostname()
+        port = 12345
 
-    with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as socket_server:
-        socket_server.bind((host, port))
-        socket_server.listen(5)
+        with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as socket_server:
+            socket_server.bind((host, port))
+            socket_server.listen(5)
 
-        print("\nSocket establecido")
+            print("\nSocket establecido")
 
-        conexion_socket, direccion = socket_server.accept()
+            conexion_socket, direccion = socket_server.accept()
 
-        print("Primera conexion : ", direccion[0])
+            print("Primera conexion : ", direccion[0])
+            hilo = hilo_servidor(conexion_socket, direccion)
+            hilo.start()
+servidor.iniciar()
