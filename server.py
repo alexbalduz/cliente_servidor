@@ -10,7 +10,9 @@ class hilo_servidor(threading.Thread):
     def run(self):
         print("\nNew conexion : ", self.direccion[0])
         for sock in self.sockets:
-            sock.send("\n" + self.direccion[0] + ": Conectado")
+            data = "\n" + self.direccion[0] + " Conectado"
+            b = bytes(data, 'UTF-8')
+            sock.send(b)
         while True:
             data = self.conexion.recv(2048)
             dt = data.decode()
